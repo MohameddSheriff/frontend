@@ -19,10 +19,10 @@ export default class App extends Component {
     if (this.state.username !== prevState.username){
       
     this.setState({loggedin:true})
-    axios.post('http://backend-competition.msherif-competition-5290c8c8e5797924dc1ad5d1b85b37c0-0002.us-south.containers.appdomain.cloud/')
+    axios.post('http://0.0.0.0:3001/')
       .then(res => {
         this.session_id=res.data;
-        axios.post('http://backend-competition.msherif-competition-5290c8c8e5797924dc1ad5d1b85b37c0-0002.us-south.containers.appdomain.cloud/user', {"message":this.state.username, "session_id":this.session_id})
+        axios.post('http://0.0.0.0:3001/user', {"message":this.state.username, "session_id":this.session_id})
           .then(res => {
             addResponseMessage(res.data);
           })
@@ -37,7 +37,7 @@ export default class App extends Component {
     setTimeout(() => {
       toggleMsgLoader();    
       
-      axios.post('http://backend-competition.msherif-competition-5290c8c8e5797924dc1ad5d1b85b37c0-0002.us-south.containers.appdomain.cloud/chat',{"message":newMessage, "session_id":this.session_id})
+      axios.post('http://0.0.0.0:3001/chat',{"message":newMessage, "session_id":this.session_id})
       .then(res => {
         addResponseMessage(res.data);
       })
